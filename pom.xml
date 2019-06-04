@@ -8,7 +8,22 @@
     <artifactId>hazelcast</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <hazelcast.version>3.7.2</hazelcast.version>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+            <version>${hazelcast.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-client</artifactId>
+            <version>${hazelcast.version}</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
