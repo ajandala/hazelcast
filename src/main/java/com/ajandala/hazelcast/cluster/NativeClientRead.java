@@ -3,9 +3,12 @@ package com.ajandala.hazelcast.cluster;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.GroupConfig;
+import com.hazelcast.core.ExecutionCallback;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.hazelcast.core.IdGenerator;
+import com.hazelcast.core.Member;
+import com.hazelcast.core.MultiExecutionCallback;
 
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -25,7 +28,14 @@ public class NativeClientRead {
 //            System.out.println(String.format("Key: %d, Value: %s", entry.getKey(), entry.getValue()));
 //        }
 //        hazelcastInstanceClient.getExecutorService("executorService").execute(new PrintRunnable());
-        Future<String> result = hazelcastInstanceClient.getExecutorService("executorService").submitToKeyOwner(new PrintCallable(), 1);
-        System.out.println(result.get());
+        hazelcastInstanceClient.getExecutorService("executorService").submitToKeyOwner(new PrintCallable(), 1, new ExecutionCallback<String>() {
+            @Override public void onResponse(String s) {
+                System.out.println(s);
+            }
+
+            @Override public void onFailure(Throwable throwable) {
+
+            }
+        });
     }
 }

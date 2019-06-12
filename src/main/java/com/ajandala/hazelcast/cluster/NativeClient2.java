@@ -7,7 +7,7 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.hazelcast.core.IdGenerator;
 
-public class NativeClient {
+public class NativeClient2 {
 
 
     public static void main(String[] args) throws InterruptedException {
@@ -19,10 +19,10 @@ public class NativeClient {
         IdGenerator idGenerator = hazelcastInstanceClient.getIdGenerator("newid");
         IMap<Integer, Person> map = hazelcastInstanceClient.getMap("data");
 
-        Person person1 = new Person("person1");
-        Person person2 = new Person("person2");
+        Person person1 = map.get(1);
+        person1.setName("Modified Person Name");
         map.put(1, person1);
-        map.put(2, person2);
+
         //            for (Map.Entry<Long, String> entry : map.entrySet()) {
         //                System.out.println(String.format("Key: %d, Value: %s", entry.getKey(), entry.getValue()));
         //            }

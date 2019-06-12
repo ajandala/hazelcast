@@ -19,12 +19,12 @@ public class PrintCallable implements Callable<String>, Serializable, HazelcastI
     }
 
     @Override public String call() {
-        System.out.println("Hola");
 
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(hazelcastInstance.getName()).append("\n");
 
-        IMap<Long, String> map = hazelcastInstance.getMap("data");
-        for (Map.Entry<Long, String> entry : map.entrySet()) {
+        IMap<Integer, Person> map = hazelcastInstance.getMap("data");
+        for (Map.Entry<Integer, Person> entry : map.entrySet()) {
             stringBuilder.append(entry.getValue()).append(" ");
         }
 
